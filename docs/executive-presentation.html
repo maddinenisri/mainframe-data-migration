@@ -1,0 +1,915 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mainframe to NoSQL: Executive Briefing</title>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+    <style>
+        :root {
+            --primary: #339af0;
+            --success: #51cf66;
+            --warning: #ffd43b;
+            --danger: #ff6b6b;
+            --mainframe: #ff922b;
+            --dark: #212529;
+            --light: #f8f9fa;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+            line-height: 1.6;
+            color: var(--dark);
+            background: var(--light);
+        }
+
+        .slide {
+            min-height: 100vh;
+            padding: 60px 80px;
+            border-bottom: 4px solid var(--primary);
+            background: white;
+        }
+
+        .slide:nth-child(even) {
+            background: #f8f9fa;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 30px;
+            border-bottom: 3px solid var(--primary);
+            padding-bottom: 15px;
+        }
+
+        h2 {
+            font-size: 1.8rem;
+            color: var(--dark);
+            margin: 30px 0 20px;
+        }
+
+        h3 {
+            font-size: 1.3rem;
+            color: #495057;
+            margin: 20px 0 10px;
+        }
+
+        p {
+            font-size: 1.1rem;
+            margin-bottom: 15px;
+            max-width: 900px;
+        }
+
+        .mermaid {
+            margin: 30px 0;
+            text-align: center;
+        }
+
+        table {
+            width: 100%;
+            max-width: 900px;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background: white;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        th, td {
+            padding: 15px 20px;
+            text-align: left;
+            border-bottom: 1px solid #dee2e6;
+        }
+
+        th {
+            background: var(--primary);
+            color: white;
+            font-weight: 600;
+        }
+
+        tr:hover {
+            background: #f1f3f4;
+        }
+
+        pre {
+            background: #2d2d2d;
+            color: #f8f8f2;
+            padding: 20px;
+            border-radius: 8px;
+            overflow-x: auto;
+            margin: 15px 0;
+            font-family: 'Monaco', 'Consolas', monospace;
+            font-size: 0.9rem;
+        }
+
+        code {
+            background: #e9ecef;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: 'Monaco', 'Consolas', monospace;
+        }
+
+        blockquote {
+            border-left: 4px solid var(--primary);
+            padding: 15px 25px;
+            margin: 20px 0;
+            background: #e7f5ff;
+            font-style: italic;
+        }
+
+        .highlight-box {
+            background: linear-gradient(135deg, #e7f5ff 0%, #d0ebff 100%);
+            padding: 25px;
+            border-radius: 12px;
+            margin: 25px 0;
+            border-left: 5px solid var(--primary);
+        }
+
+        .success-box {
+            background: linear-gradient(135deg, #d3f9d8 0%, #b2f2bb 100%);
+            border-left-color: var(--success);
+        }
+
+        .warning-box {
+            background: linear-gradient(135deg, #fff9db 0%, #fff3bf 100%);
+            border-left-color: var(--warning);
+        }
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
+            margin: 30px 0;
+        }
+
+        .card {
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        .card h3 {
+            color: var(--primary);
+            margin-top: 0;
+        }
+
+        .title-slide {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            background: linear-gradient(135deg, #339af0 0%, #1c7ed6 100%);
+            color: white;
+        }
+
+        .title-slide h1 {
+            font-size: 3.5rem;
+            border: none;
+            color: white;
+            margin-bottom: 20px;
+        }
+
+        .title-slide p {
+            font-size: 1.5rem;
+            opacity: 0.9;
+        }
+
+        .nav {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: white;
+            padding: 15px 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            z-index: 1000;
+        }
+
+        .nav a {
+            color: var(--primary);
+            text-decoration: none;
+            margin: 0 10px;
+            font-weight: 500;
+        }
+
+        .nav a:hover {
+            text-decoration: underline;
+        }
+
+        .metric {
+            display: inline-block;
+            background: var(--primary);
+            color: white;
+            padding: 8px 20px;
+            border-radius: 20px;
+            margin: 5px;
+            font-weight: bold;
+        }
+
+        .metric.success {
+            background: var(--success);
+        }
+
+        .phase-card {
+            background: white;
+            border-radius: 12px;
+            padding: 30px;
+            margin: 20px 0;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            border-top: 5px solid var(--primary);
+        }
+
+        .phase-card.current {
+            border-top-color: var(--success);
+            background: linear-gradient(180deg, #d3f9d8 0%, white 30%);
+        }
+
+        @media print {
+            .slide {
+                page-break-after: always;
+            }
+            .nav {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="nav">
+        <a href="#title">Top</a>
+        <a href="#architecture">Architecture</a>
+        <a href="#evidence">Evidence</a>
+        <a href="#roadmap">Roadmap</a>
+    </nav>
+
+    <!-- Title Slide -->
+    <section class="slide title-slide" id="title">
+        <h1>Mainframe to NoSQL</h1>
+        <p>Technical Deep Dive & Migration Strategy</p>
+        <p style="margin-top: 40px; opacity: 0.7;">Executive Briefing Deck</p>
+    </section>
+
+    <!-- Executive Summary -->
+    <section class="slide" id="summary">
+        <h1>Executive Summary</h1>
+
+        <div class="grid-2">
+            <div class="card">
+                <h3>The Challenge</h3>
+                <ul>
+                    <li>Increasing mainframe MIPS costs</li>
+                    <li>Limited agility for new features</li>
+                    <li>Shrinking COBOL expertise pool</li>
+                </ul>
+            </div>
+            <div class="card">
+                <h3>The Solution</h3>
+                <ul>
+                    <li><strong>Decouple data</strong> from expensive mainframe compute</li>
+                    <li><strong>Preserve integrity</strong> using COBOL definitions</li>
+                    <li><strong>Enable modern apps</strong> via JSON format</li>
+                </ul>
+            </div>
+        </div>
+
+        <h2>Proof of Concept Results</h2>
+        <div style="margin: 20px 0;">
+            <span class="metric">11 Datasets Converted</span>
+            <span class="metric">1,136 Records Processed</span>
+            <span class="metric success">100% Success Rate</span>
+            <span class="metric">JSON Output (DynamoDB-ready)</span>
+        </div>
+
+        <table>
+            <tr>
+                <th>Dataset</th>
+                <th>Source</th>
+                <th>Records</th>
+                <th>Status</th>
+            </tr>
+            <tr>
+                <td>customers</td>
+                <td>AWS.M2.CARDDEMO.CUSTDATA.PS</td>
+                <td>50</td>
+                <td>Success</td>
+            </tr>
+            <tr>
+                <td>accounts</td>
+                <td>AWS.M2.CARDDEMO.ACCTDATA.PS</td>
+                <td>50</td>
+                <td>Success</td>
+            </tr>
+            <tr>
+                <td>daily_transactions</td>
+                <td>AWS.M2.CARDDEMO.DALYTRAN.PS</td>
+                <td>300</td>
+                <td>Success</td>
+            </tr>
+            <tr>
+                <td>export_data</td>
+                <td>AWS.M2.CARDDEMO.EXPORT.DATA.PS</td>
+                <td>500</td>
+                <td>Success</td>
+            </tr>
+        </table>
+    </section>
+
+    <!-- Business Value -->
+    <section class="slide" id="value">
+        <h1>Business Value Proposition</h1>
+
+        <h2>Cost Reduction Model</h2>
+        <div class="mermaid">
+graph LR
+    subgraph Before["Before Migration"]
+        A[("Mainframe<br/>MIPS $$$$")] --> B["Applications"]
+        A --> C["Reports"]
+        A --> D["Analytics"]
+    end
+
+    subgraph After["After Migration"]
+        E[("DynamoDB<br/>Pay-per-use")] --> F["Applications"]
+        E --> G["Reports"]
+        E --> H["Analytics"]
+        I[("Mainframe<br/>Core Only")] --> J["Batch Jobs"]
+    end
+
+    style A fill:#ff6b6b,stroke:#333,color:#fff
+    style E fill:#51cf66,stroke:#333,color:#fff
+    style I fill:#ffd43b,stroke:#333,color:#000
+        </div>
+
+        <h2>Key Benefits</h2>
+        <table>
+            <tr>
+                <th>Benefit</th>
+                <th>Impact</th>
+            </tr>
+            <tr>
+                <td><strong>MIPS Reduction</strong></td>
+                <td>Move read workloads off mainframe, reducing compute costs</td>
+            </tr>
+            <tr>
+                <td><strong>Scalability</strong></td>
+                <td>Auto-scaling cloud infrastructure handles any load</td>
+            </tr>
+            <tr>
+                <td><strong>Agility</strong></td>
+                <td>JSON enables rapid application development cycles</td>
+            </tr>
+            <tr>
+                <td><strong>Talent Pool</strong></td>
+                <td>Python/Cloud skills widely available vs COBOL specialists</td>
+            </tr>
+        </table>
+    </section>
+
+    <!-- High-Level Architecture -->
+    <section class="slide" id="architecture">
+        <h1>High-Level Architecture</h1>
+
+        <h2>End-to-End Data Flow</h2>
+        <div class="mermaid">
+flowchart TB
+    subgraph Mainframe["Legacy Mainframe"]
+        direction TB
+        VSAM[("VSAM Files<br/>(EBCDIC Binary)")]
+        DB2[("DB2 Tables<br/>(Relational)")]
+        CPY["COBOL Copybooks<br/>(Schema)"]
+    end
+
+    subgraph Pipeline["AWS Migration Pipeline"]
+        direction TB
+        S3IN[("S3 Input")]
+        GLUE["AWS Glue<br/>(Serverless ETL)"]
+        S3OUT[("S3 Output<br/>JSON")]
+    end
+
+    subgraph Target["Modern Cloud Platform"]
+        direction TB
+        DYNAMO[("DynamoDB")]
+        ELASTIC[("OpenSearch")]
+        APPS["Modern Apps"]
+    end
+
+    VSAM --> S3IN
+    DB2 --> S3IN
+    CPY --> GLUE
+    S3IN --> GLUE
+    GLUE --> S3OUT
+    S3OUT --> DYNAMO
+    S3OUT --> ELASTIC
+    DYNAMO --> APPS
+    ELASTIC --> APPS
+
+    style VSAM fill:#ff922b,stroke:#333,color:#fff
+    style DB2 fill:#ff922b,stroke:#333,color:#fff
+    style DYNAMO fill:#339af0,stroke:#333,color:#fff
+    style ELASTIC fill:#339af0,stroke:#333,color:#fff
+    style GLUE fill:#20c997,stroke:#333,color:#fff
+        </div>
+
+        <div class="highlight-box">
+            <h3>Key Innovation: Schema-on-Read</h3>
+            <p>Instead of manually mapping thousands of fields, we use the <strong>original COBOL Copybooks</strong> as the source of truth.</p>
+            <p><strong>Result:</strong> When mainframe teams change data structures, we simply upload the new Copybook. Zero code changes required.</p>
+        </div>
+    </section>
+
+    <!-- Core Engine -->
+    <section class="slide" id="engine">
+        <h1>The Core Engine</h1>
+
+        <h2>How convert_all.py Works</h2>
+        <div class="mermaid">
+flowchart LR
+    subgraph Input["Input Directory"]
+        DATA["Binary EBCDIC<br/>(.PS files)"]
+        COPY["COBOL Copybook<br/>(.cpy files)"]
+    end
+
+    subgraph Engine["Conversion Engine"]
+        MATCH["Auto-Match<br/>Data + Schema"]
+        PARSE["Parse EBCDIC<br/>Packed Decimal"]
+        TRANSFORM["Transform<br/>to JSON"]
+    end
+
+    subgraph Output["Output"]
+        JSON["JSON Files"]
+        MANIFEST["Audit Manifest"]
+        SUCCESS["Integrity Checks"]
+    end
+
+    DATA --> MATCH
+    COPY --> MATCH
+    MATCH --> PARSE
+    PARSE --> TRANSFORM
+    TRANSFORM --> JSON
+    TRANSFORM --> MANIFEST
+    TRANSFORM --> SUCCESS
+
+    style DATA fill:#ff922b,stroke:#333,color:#fff
+    style JSON fill:#51cf66,stroke:#333,color:#fff
+    style SUCCESS fill:#339af0,stroke:#333,color:#fff
+        </div>
+
+        <h2>Automated Dataset Processing</h2>
+        <table>
+            <tr>
+                <th>Dataset</th>
+                <th>Data File</th>
+                <th>Copybook</th>
+                <th>Records</th>
+            </tr>
+            <tr>
+                <td>customers</td>
+                <td>AWS.M2.CARDDEMO.CUSTDATA.PS</td>
+                <td>CUSTREC.cpy</td>
+                <td>50</td>
+            </tr>
+            <tr>
+                <td>accounts</td>
+                <td>AWS.M2.CARDDEMO.ACCTDATA.PS</td>
+                <td>CVACT01Y.cpy</td>
+                <td>50</td>
+            </tr>
+            <tr>
+                <td>cards</td>
+                <td>AWS.M2.CARDDEMO.CARDDATA.PS</td>
+                <td>CVACT02Y.cpy</td>
+                <td>50</td>
+            </tr>
+            <tr>
+                <td>daily_transactions</td>
+                <td>AWS.M2.CARDDEMO.DALYTRAN.PS</td>
+                <td>CVTRA06Y.cpy</td>
+                <td>300</td>
+            </tr>
+            <tr>
+                <td>users</td>
+                <td>AWS.M2.CARDDEMO.USRSEC.PS</td>
+                <td>CSUSR01Y.cpy</td>
+                <td>10</td>
+            </tr>
+        </table>
+    </section>
+
+    <!-- Evidence of Success -->
+    <section class="slide" id="evidence">
+        <h1>Evidence of Success</h1>
+
+        <h2>COBOL Copybook to JSON Transformation</h2>
+
+        <div class="grid-2">
+            <div class="card">
+                <h3>Source: COBOL Copybook (CUSTREC.cpy)</h3>
+                <pre>01  CUSTOMER-RECORD.
+    05  CUST-ID              PIC 9(09).
+    05  CUST-FIRST-NAME      PIC X(25).
+    05  CUST-LAST-NAME       PIC X(25).
+    05  CUST-DOB-YYYYMMDD    PIC X(10).
+    05  CUST-FICO-SCORE      PIC 9(03).</pre>
+            </div>
+            <div class="card">
+                <h3>Output: Readable JSON</h3>
+                <pre>{
+  "CUST_ID": 1,
+  "CUST_FIRST_NAME": "Immanuel",
+  "CUST_LAST_NAME": "Kessler",
+  "CUST_DOB_YYYYMMDD": "1961-06-08",
+  "CUST_FICO_CREDIT_SCORE": 274
+}</pre>
+            </div>
+        </div>
+
+        <div class="highlight-box success-box">
+            <h3>The Transformation in Action</h3>
+            <div class="mermaid">
+flowchart LR
+    B1["F0F0F0F0F0F0F0F1<br/>(EBCDIC Binary)"] -->|"Cobrix Parser"| R1['"CUST_ID": 1<br/>(Human Readable)']
+    style B1 fill:#868e96,stroke:#333,color:#fff
+    style R1 fill:#51cf66,stroke:#333,color:#fff
+            </div>
+            <p>Binary mainframe data becomes instantly queryable JSON - no manual mapping required!</p>
+        </div>
+    </section>
+
+    <!-- Data Integrity -->
+    <section class="slide" id="integrity">
+        <h1>Data Integrity & Auditability</h1>
+
+        <h2>Built-In Safety Mechanisms</h2>
+        <div class="mermaid">
+flowchart TB
+    subgraph Process["Conversion Process"]
+        SPARK["Spark Job"] --> WRITE["Write JSON"] --> VALIDATE["Validate CRC"]
+    end
+
+    subgraph Markers["Integrity Markers"]
+        CRC["._SUCCESS.crc<br/>(Checksum)"]
+        SUCCESS["_SUCCESS<br/>(Complete)"]
+        MANIFEST["manifest.json"]
+    end
+
+    subgraph Audit["Audit Trail"]
+        COUNT["Record Counts"]
+        STATUS["Status Tracking"]
+        VERSION["Version Info"]
+    end
+
+    VALIDATE -->|"Pass"| CRC
+    VALIDATE -->|"Pass"| SUCCESS
+    VALIDATE --> MANIFEST
+    MANIFEST --> COUNT
+    MANIFEST --> STATUS
+    MANIFEST --> VERSION
+
+    style CRC fill:#339af0,stroke:#333,color:#fff
+    style SUCCESS fill:#51cf66,stroke:#333,color:#fff
+    style MANIFEST fill:#ffd43b,stroke:#333,color:#000
+        </div>
+
+        <h2>What This Means for Stakeholders</h2>
+        <table>
+            <tr>
+                <th>Safety Feature</th>
+                <th>Business Impact</th>
+            </tr>
+            <tr>
+                <td><strong>CRC Checksums</strong></td>
+                <td>No partial or corrupt data enters production systems</td>
+            </tr>
+            <tr>
+                <td><strong>_SUCCESS Files</strong></td>
+                <td>Only complete jobs are promoted to downstream systems</td>
+            </tr>
+            <tr>
+                <td><strong>Manifest Tracking</strong></td>
+                <td>Full audit trail for regulatory compliance</td>
+            </tr>
+            <tr>
+                <td><strong>Isolated Folders</strong></td>
+                <td>accounts/, cards/, users/ - clean data partitions</td>
+            </tr>
+        </table>
+
+        <h3>Sample Conversion Manifest</h3>
+        <pre>{
+  "datasets": [
+    {"name": "customers", "status": "success", "record_count": 50},
+    {"name": "accounts", "status": "success", "record_count": 50},
+    {"name": "daily_transactions", "status": "success", "record_count": 300}
+  ],
+  "total_records": 1136,
+  "cobrix_version": "2.6.9",
+  "spark_version": "3.5.0"
+}</pre>
+    </section>
+
+    <!-- DB2 Migration -->
+    <section class="slide" id="db2">
+        <h1>DB2 Relational Data Migration</h1>
+
+        <h2>Handling Structured SQL Data</h2>
+        <div class="mermaid">
+flowchart TB
+    subgraph DB2["DB2 Database"]
+        DDL["DDL Definitions"]
+        TABLES[("DB2 Tables")]
+    end
+
+    subgraph Script["db2_to_json.py"]
+        PARSE["Parse Schema"]
+        JDBC["JDBC Export"]
+        TRANSFORM["Transform"]
+    end
+
+    subgraph Output["Unified Output"]
+        JSON1["transaction_type.json"]
+        JSON2["transaction_category.json"]
+    end
+
+    DDL --> PARSE
+    TABLES --> JDBC
+    PARSE --> TRANSFORM
+    JDBC --> TRANSFORM
+    TRANSFORM --> JSON1
+    TRANSFORM --> JSON2
+
+    style TABLES fill:#ff922b,stroke:#333,color:#fff
+    style JSON1 fill:#51cf66,stroke:#333,color:#fff
+    style JSON2 fill:#51cf66,stroke:#333,color:#fff
+        </div>
+
+        <div class="grid-2">
+            <div class="card">
+                <h3>DDL Definition (TRNTYPE.ddl)</h3>
+                <pre>CREATE TABLE CARDDEMO.TRANSACTION_TYPE
+(   TR_TYPE        CHAR(2) NOT NULL,
+    TR_DESCRIPTION VARCHAR(50),
+    PRIMARY KEY(TR_TYPE));</pre>
+            </div>
+            <div class="card">
+                <h3>Exported JSON Output</h3>
+                <pre>{"tr_type": "01", "tr_description": "Purchase"}
+{"tr_type": "02", "tr_description": "Cash Advance"}
+{"tr_type": "04", "tr_description": "Payment"}</pre>
+            </div>
+        </div>
+
+        <div class="highlight-box">
+            <h3>Key Benefit: Homogenized Data Layer</h3>
+            <p>Whether the source is <strong>VSAM flat files</strong> (EBCDIC binary) or <strong>DB2 relational tables</strong>, downstream applications see <strong>identical JSON format</strong>.</p>
+        </div>
+    </section>
+
+    <!-- Roadmap -->
+    <section class="slide" id="roadmap">
+        <h1>Production Roadmap</h1>
+
+        <h2>Three-Phase Implementation</h2>
+
+        <div class="phase-card current">
+            <h3>Phase 1: Batch Conversion (Current)</h3>
+            <div class="mermaid">
+flowchart LR
+    MF["Mainframe<br/>Nightly Batch"] -->|"FTP/SFTP"| S3["S3 Input"]
+    S3 --> GLUE["AWS Glue"]
+    GLUE --> OUT["S3 JSON"]
+    OUT --> DDB["DynamoDB"]
+    DDB --> APP["Read-Only Apps"]
+
+    style MF fill:#ff922b,stroke:#333,color:#fff
+    style DDB fill:#339af0,stroke:#333,color:#fff
+    style APP fill:#51cf66,stroke:#333,color:#fff
+            </div>
+            <ul>
+                <li>Daily dumps via convert_all.py</li>
+                <li>Load to DynamoDB for read-only applications</li>
+                <li>Validated with 1,136 records across 11 datasets</li>
+            </ul>
+        </div>
+
+        <div class="phase-card">
+            <h3>Phase 2: Event-Driven Pipeline</h3>
+            <div class="mermaid">
+flowchart LR
+    MF["Mainframe"] -->|"S3 Upload"| S3["S3 Input"]
+    S3 -->|"Event"| LAMBDA["Lambda"]
+    LAMBDA --> GLUE["Glue Job"]
+    GLUE --> OUT["S3 Output"]
+    OUT --> DDB["DynamoDB"]
+
+    style LAMBDA fill:#f783ac,stroke:#333,color:#fff
+    style S3 fill:#ffd43b,stroke:#333,color:#000
+            </div>
+            <ul>
+                <li>S3 event triggers on file arrival</li>
+                <li>Automated Glue job execution</li>
+                <li>Near real-time data availability</li>
+            </ul>
+        </div>
+
+        <div class="phase-card">
+            <h3>Phase 3: Full Modernization</h3>
+            <div class="mermaid">
+flowchart TB
+    BATCH["Mainframe<br/>(Batch Only)"] -->|"Nightly"| DDB[("DynamoDB")]
+    DDB --> WEB["Web Apps"]
+    DDB --> MOBILE["Mobile"]
+    DDB --> API["APIs"]
+    ES[("OpenSearch")] --> WEB
+    ES --> API
+
+    style BATCH fill:#ffd43b,stroke:#333,color:#000
+    style DDB fill:#339af0,stroke:#333,color:#fff
+    style ES fill:#339af0,stroke:#333,color:#fff
+            </div>
+            <ul>
+                <li>Decommission mainframe read paths</li>
+                <li>All queries via DynamoDB/OpenSearch</li>
+                <li>Mainframe retained for batch processing only</li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- Risk Mitigation -->
+    <section class="slide" id="risk">
+        <h1>Risk Mitigation</h1>
+
+        <h2>Identified Risks and Controls</h2>
+        <div class="mermaid">
+flowchart TB
+    subgraph Risks["Risk Categories"]
+        R1["Data Loss"]
+        R2["Schema Changes"]
+        R3["Performance"]
+        R4["Security"]
+    end
+
+    subgraph Controls["Mitigation Controls"]
+        C1["CRC Checksums"]
+        C2["Schema-on-Read"]
+        C3["Auto-Scaling"]
+        C4["IAM + Encryption"]
+    end
+
+    R1 --> C1
+    R2 --> C2
+    R3 --> C3
+    R4 --> C4
+
+    style R1 fill:#ff6b6b,stroke:#333,color:#fff
+    style R2 fill:#ff6b6b,stroke:#333,color:#fff
+    style R3 fill:#ff6b6b,stroke:#333,color:#fff
+    style R4 fill:#ff6b6b,stroke:#333,color:#fff
+    style C1 fill:#51cf66,stroke:#333,color:#fff
+    style C2 fill:#51cf66,stroke:#333,color:#fff
+    style C3 fill:#51cf66,stroke:#333,color:#fff
+    style C4 fill:#51cf66,stroke:#333,color:#fff
+        </div>
+
+        <h2>Risk Matrix</h2>
+        <table>
+            <tr>
+                <th>Risk</th>
+                <th>Likelihood</th>
+                <th>Impact</th>
+                <th>Mitigation</th>
+                <th>Status</th>
+            </tr>
+            <tr>
+                <td>Data Loss</td>
+                <td>Low</td>
+                <td>High</td>
+                <td>CRC checksums, _SUCCESS markers</td>
+                <td style="color: green;">Implemented</td>
+            </tr>
+            <tr>
+                <td>Schema Drift</td>
+                <td>Medium</td>
+                <td>Medium</td>
+                <td>Copybook-driven parsing</td>
+                <td style="color: green;">Implemented</td>
+            </tr>
+            <tr>
+                <td>Performance</td>
+                <td>Low</td>
+                <td>Medium</td>
+                <td>Serverless auto-scaling</td>
+                <td style="color: blue;">Designed</td>
+            </tr>
+            <tr>
+                <td>Security</td>
+                <td>Low</td>
+                <td>High</td>
+                <td>IAM, KMS encryption</td>
+                <td style="color: orange;">Planned</td>
+            </tr>
+        </table>
+    </section>
+
+    <!-- Key Takeaways -->
+    <section class="slide" id="takeaways">
+        <h1>Key Takeaways</h1>
+
+        <div class="mermaid">
+mindmap
+    root((Migration<br/>Strategy))
+        Safety
+            CRC Checksums
+            Audit Manifests
+            Isolated Outputs
+        Flexibility
+            Schema-on-Read
+            Copybook Driven
+            No Hardcoding
+        Scalability
+            Serverless Glue
+            Auto-scaling
+            Pay-per-use
+        Maintainability
+            Python/Spark
+            Open Standards
+            JSON Output
+        </div>
+
+        <h2>Summary for Decision Makers</h2>
+        <div class="grid-2">
+            <div class="highlight-box success-box">
+                <h3>1. Proven Technology</h3>
+                <p>Successfully converted <strong>1,136 records</strong> across <strong>11 datasets</strong></p>
+            </div>
+            <div class="highlight-box success-box">
+                <h3>2. Zero Code Changes</h3>
+                <p>Copybook updates <strong>automatically adapt</strong> the pipeline</p>
+            </div>
+            <div class="highlight-box success-box">
+                <h3>3. Full Audit Trail</h3>
+                <p>Every file tracked with <strong>checksums and manifests</strong></p>
+            </div>
+            <div class="highlight-box success-box">
+                <h3>4. Cost Efficient</h3>
+                <p>Serverless = <strong>pay only for what you use</strong></p>
+            </div>
+        </div>
+
+        <div class="highlight-box" style="margin-top: 30px;">
+            <h3>5. Future Ready</h3>
+            <p>JSON enables <strong>DynamoDB, OpenSearch, and any modern application</strong> - positioning us for long-term digital transformation.</p>
+        </div>
+    </section>
+
+    <!-- Presenter Notes -->
+    <section class="slide" id="notes">
+        <h1>Presenter Notes</h1>
+
+        <div class="warning-box highlight-box">
+            <h3>Slide: Evidence of Success</h3>
+            <p><strong>"Show, Don't Just Tell":</strong> Open the actual <code>output/customers/part-00000...json</code> file on screen. Showing readable JSON generated from "unreadable" mainframe binary is a powerful demonstration for stakeholders.</p>
+        </div>
+
+        <div class="warning-box highlight-box">
+            <h3>Slide: Data Integrity</h3>
+            <p><strong>The "Safety Net":</strong> Emphasize the <code>._SUCCESS.crc</code> files. Executives worry about data loss. These prove the system has built-in integrity checks that prevent partial/corrupt data from entering production.</p>
+        </div>
+
+        <div class="warning-box highlight-box">
+            <h3>Slide: Architecture</h3>
+            <p><strong>Future Proofing:</strong> Stress that we use Copybooks (<code>.cpy</code>) as the source of truth. This means we aren't hardcoding logic that will break next year; we're building a system that adapts to the mainframe team's changes automatically.</p>
+        </div>
+
+        <h2>Technology Stack Reference</h2>
+        <table>
+            <tr><th>Component</th><th>Technology</th><th>Purpose</th></tr>
+            <tr><td>ETL Engine</td><td>AWS Glue 5.0</td><td>Serverless data processing</td></tr>
+            <tr><td>Processing</td><td>Apache Spark 3.5</td><td>Distributed computing</td></tr>
+            <tr><td>COBOL Parser</td><td>Cobrix 2.6.9</td><td>EBCDIC/Copybook handling</td></tr>
+            <tr><td>Language</td><td>Python 3.11</td><td>Orchestration logic</td></tr>
+            <tr><td>Target DB</td><td>Amazon DynamoDB</td><td>NoSQL data store</td></tr>
+        </table>
+    </section>
+
+    <script>
+        mermaid.initialize({
+            startOnLoad: true,
+            theme: 'base',
+            themeVariables: {
+                primaryColor: '#339af0',
+                primaryTextColor: '#fff',
+                primaryBorderColor: '#1c7ed6',
+                lineColor: '#495057',
+                secondaryColor: '#51cf66',
+                tertiaryColor: '#ffd43b'
+            }
+        });
+    </script>
+</body>
+</html>
