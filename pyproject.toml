@@ -1,0 +1,29 @@
+[project]
+name = "mainframe-migration"
+version = "0.1.0"
+description = "Local testing environment for AWS Glue 5.0 mainframe data migration"
+requires-python = ">=3.10,<3.12"
+dependencies = [
+    "pyspark==3.5.0",
+    "psycopg2-binary>=2.9.0",  # PostgreSQL driver for Python
+]
+
+[dependency-groups]
+dev = [
+    "pytest>=7.0.0",
+    "black>=23.0.0",
+    "ruff>=0.1.0",
+]
+
+[project.scripts]
+convert-ebcdic = "convert_all:main"
+export-db2 = "db2.scripts.db2_to_json:main"
+migrate-db2 = "db2.scripts.db2_to_postgres:main"
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+
+[tool.black]
+line-length = 100
+target-version = ["py311"]

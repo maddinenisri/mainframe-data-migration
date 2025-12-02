@@ -1,0 +1,7 @@
+{"tr_description":"Purchase","tr_type":"01"}
+{"tr_description":"Cash Advance","tr_type":"02"}
+{"tr_description":"Balance Transfer","tr_type":"03"}
+{"tr_description":"Payment","tr_type":"04"}
+{"tr_description":"Refund","tr_type":"05"}
+{"tr_description":"Fee","tr_type":"06"}
+{"tr_description":"Interest","tr_type":"07"}

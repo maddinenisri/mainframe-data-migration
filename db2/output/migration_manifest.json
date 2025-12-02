@@ -1,0 +1,30 @@
+{
+  "tables": [
+    {
+      "name": "transaction_type",
+      "source_table": "CARDDEMO.TRANSACTION_TYPE",
+      "target_table": "transaction_type",
+      "target_type": "json",
+      "status": "success",
+      "record_count": 7,
+      "error": null,
+      "mode": "mock",
+      "output_path": "db2/output/transaction_type"
+    },
+    {
+      "name": "transaction_type_category",
+      "source_table": "CARDDEMO.TRANSACTION_TYPE_CATEGORY",
+      "target_table": "transaction_type_category",
+      "target_type": "json",
+      "status": "success",
+      "record_count": 18,
+      "error": null,
+      "mode": "mock",
+      "output_path": "db2/output/transaction_type_category"
+    }
+  ],
+  "total_records": 25,
+  "source_mode": "mock",
+  "target": "json",
+  "spark_version": "3.5.0"
+}

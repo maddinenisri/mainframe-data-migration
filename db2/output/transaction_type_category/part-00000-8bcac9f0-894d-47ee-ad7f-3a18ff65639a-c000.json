@@ -1,0 +1,18 @@
+{"trc_cat_data":"Grocery Stores","trc_type_category":"5411","trc_type_code":"01"}
+{"trc_cat_data":"Gas Stations","trc_type_category":"5541","trc_type_code":"01"}
+{"trc_cat_data":"Restaurants","trc_type_category":"5812","trc_type_code":"01"}
+{"trc_cat_data":"Drug Stores","trc_type_category":"5912","trc_type_code":"01"}
+{"trc_cat_data":"Miscellaneous Retail","trc_type_category":"5999","trc_type_code":"01"}
+{"trc_cat_data":"ATM Cash Advance","trc_type_category":"6010","trc_type_code":"02"}
+{"trc_cat_data":"Bank Cash Advance","trc_type_category":"6011","trc_type_code":"02"}
+{"trc_cat_data":"Internal Transfer","trc_type_category":"0001","trc_type_code":"03"}
+{"trc_cat_data":"External Transfer","trc_type_category":"0002","trc_type_code":"03"}
+{"trc_cat_data":"Online Payment","trc_type_category":"0001","trc_type_code":"04"}
+{"trc_cat_data":"Auto Payment","trc_type_category":"0002","trc_type_code":"04"}
+{"trc_cat_data":"Phone Payment","trc_type_category":"0003","trc_type_code":"04"}
+{"trc_cat_data":"Merchant Refund","trc_type_category":"0001","trc_type_code":"05"}
+{"trc_cat_data":"Dispute Credit","trc_type_category":"0002","trc_type_code":"05"}
+{"trc_cat_data":"Annual Fee","trc_type_category":"0001","trc_type_code":"06"}
+{"trc_cat_data":"Late Fee","trc_type_category":"0002","trc_type_code":"06"}
+{"trc_cat_data":"Over Limit Fee","trc_type_category":"0003","trc_type_code":"06"}
+{"trc_cat_data":"Purchase Interest","trc_type_category":"0001","trc_type_code":"07"}

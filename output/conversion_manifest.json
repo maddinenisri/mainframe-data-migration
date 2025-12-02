@@ -1,0 +1,106 @@
+{
+  "datasets": [
+    {
+      "name": "customers",
+      "data_file": "AWS.M2.CARDDEMO.CUSTDATA.PS",
+      "copybook": "CUSTREC.cpy",
+      "status": "success",
+      "record_count": 50,
+      "error": null,
+      "output_path": "output/customers"
+    },
+    {
+      "name": "accounts",
+      "data_file": "AWS.M2.CARDDEMO.ACCTDATA.PS",
+      "copybook": "CVACT01Y.cpy",
+      "status": "success",
+      "record_count": 50,
+      "error": null,
+      "output_path": "output/accounts"
+    },
+    {
+      "name": "cards",
+      "data_file": "AWS.M2.CARDDEMO.CARDDATA.PS",
+      "copybook": "CVACT02Y.cpy",
+      "status": "success",
+      "record_count": 50,
+      "error": null,
+      "output_path": "output/cards"
+    },
+    {
+      "name": "card_xref",
+      "data_file": "AWS.M2.CARDDEMO.CARDXREF.PS",
+      "copybook": "CVACT03Y.cpy",
+      "status": "success",
+      "record_count": 50,
+      "error": null,
+      "output_path": "output/card_xref"
+    },
+    {
+      "name": "daily_transactions",
+      "data_file": "AWS.M2.CARDDEMO.DALYTRAN.PS",
+      "copybook": "CVTRA06Y.cpy",
+      "status": "success",
+      "record_count": 300,
+      "error": null,
+      "output_path": "output/daily_transactions"
+    },
+    {
+      "name": "transaction_types",
+      "data_file": "AWS.M2.CARDDEMO.TRANTYPE.PS",
+      "copybook": "CVTRA03Y.cpy",
+      "status": "success",
+      "record_count": 7,
+      "error": null,
+      "output_path": "output/transaction_types"
+    },
+    {
+      "name": "transaction_categories",
+      "data_file": "AWS.M2.CARDDEMO.TRANCATG.PS",
+      "copybook": "CVTRA04Y.cpy",
+      "status": "success",
+      "record_count": 18,
+      "error": null,
+      "output_path": "output/transaction_categories"
+    },
+    {
+      "name": "users",
+      "data_file": "AWS.M2.CARDDEMO.USRSEC.PS",
+      "copybook": "CSUSR01Y.cpy",
+      "status": "success",
+      "record_count": 10,
+      "error": null,
+      "output_path": "output/users"
+    },
+    {
+      "name": "discount_groups",
+      "data_file": "AWS.M2.CARDDEMO.DISCGRP.PS",
+      "copybook": "DISCGRP.cpy",
+      "status": "success",
+      "record_count": 51,
+      "error": null,
+      "output_path": "output/discount_groups"
+    },
+    {
+      "name": "category_balances",
+      "data_file": "AWS.M2.CARDDEMO.TCATBALF.PS",
+      "copybook": "TCATBALF.cpy",
+      "status": "success",
+      "record_count": 50,
+      "error": null,
+      "output_path": "output/category_balances"
+    },
+    {
+      "name": "export_data",
+      "data_file": "AWS.M2.CARDDEMO.EXPORT.DATA.PS",
+      "copybook": "CVEXPORT.cpy",
+      "status": "success",
+      "record_count": 500,
+      "error": null,
+      "output_path": "output/export_data"
+    }
+  ],
+  "total_records": 1136,
+  "cobrix_version": "2.6.9",
+  "spark_version": "3.5.0"
+}
