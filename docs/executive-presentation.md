@@ -50,7 +50,7 @@ A serverless, cloud-native data migration pipeline that:
 ```mermaid
 graph LR
     subgraph Before["Before Migration"]
-        A[("Mainframe<br/>MIPS $$$$")] --> B["Applications"]
+        A[("Mainframe<br/>High MIPS Cost")] --> B["Applications"]
         A --> C["Reports"]
         A --> D["Analytics"]
     end
@@ -86,16 +86,16 @@ graph LR
 flowchart TB
     subgraph Mainframe["Legacy Mainframe"]
         direction TB
-        VSAM[("VSAM Files<br/>(EBCDIC Binary)")]
-        DB2[("DB2 Tables<br/>(Relational)")]
-        CPY["COBOL Copybooks<br/>(Schema Definitions)"]
+        VSAM[("VSAM Files<br/>EBCDIC Binary")]
+        DB2[("DB2 Tables<br/>Relational")]
+        CPY["COBOL Copybooks<br/>Schema Definitions"]
     end
 
     subgraph Pipeline["AWS Migration Pipeline"]
         direction TB
         S3IN[("S3 Input<br/>Bucket")]
-        GLUE["AWS Glue<br/>(Serverless ETL)"]
-        SPARK["Apache Spark<br/>+ Cobrix"]
+        GLUE["AWS Glue<br/>Serverless ETL"]
+        SPARK["Apache Spark<br/>with Cobrix"]
         S3OUT[("S3 Output<br/>JSON")]
     end
 
@@ -139,20 +139,20 @@ Instead of manually mapping thousands of fields, we use the **original COBOL Cop
 ```mermaid
 flowchart LR
     subgraph Input["Input Directory"]
-        DATA["AWS.M2.CARDDEMO<br/>.CUSTDATA.PS<br/>(Binary EBCDIC)"]
-        COPY["CUSTREC.cpy<br/>(Schema Definition)"]
+        DATA["AWS.M2.CARDDEMO<br/>CUSTDATA.PS<br/>Binary EBCDIC"]
+        COPY["CUSTREC.cpy<br/>Schema Definition"]
     end
 
     subgraph Engine["Conversion Engine"]
         MATCH["Auto-Match<br/>Data + Copybook"]
-        PARSE["Parse EBCDIC<br/>(Packed Decimal)"]
+        PARSE["Parse EBCDIC<br/>Packed Decimal"]
         TRANSFORM["Transform to<br/>JSON"]
     end
 
     subgraph Output["Output Directory"]
         JSON["customers/<br/>part-00000.json"]
         MANIFEST["conversion_<br/>manifest.json"]
-        SUCCESS["._SUCCESS.crc<br/>(Integrity Check)"]
+        SUCCESS["._SUCCESS.crc<br/>Integrity Check"]
     end
 
     DATA --> MATCH
@@ -221,14 +221,14 @@ AWS.M2.CARDDEMO.CUSTDATA.PS
 ```mermaid
 flowchart LR
     subgraph Binary["Mainframe Binary"]
-        B1["F0F0F0F0F0F0F0F1<br/>(EBCDIC)"]
+        B1["F0F0F0F0F0F0F0F1<br/>EBCDIC Bytes"]
     end
 
     subgraph Readable["Human Readable"]
-        R1['"CUST_ID": 1']
+        R1["CUST_ID: 1<br/>JSON Field"]
     end
 
-    B1 -->|"Cobrix Parser"| R1
+    B1 -->|Cobrix Parser| R1
 
     style B1 fill:#868e96,stroke:#333,color:#fff
     style R1 fill:#51cf66,stroke:#333,color:#fff
@@ -249,8 +249,8 @@ flowchart TB
     end
 
     subgraph Verification["Integrity Markers"]
-        CRC["._SUCCESS.crc<br/>(Checksum)"]
-        SUCCESS["_SUCCESS<br/>(Job Complete)"]
+        CRC["._SUCCESS.crc<br/>Checksum"]
+        SUCCESS["_SUCCESS<br/>Job Complete"]
         MANIFEST["conversion_<br/>manifest.json"]
     end
 
@@ -422,11 +422,11 @@ flowchart LR
 
 ```mermaid
 flowchart TB
-    subgraph Legacy["Mainframe (Reduced)"]
+    subgraph Legacy["Mainframe - Reduced"]
         BATCH["Batch Processing<br/>Only"]
     end
 
-    subgraph Cloud["AWS Cloud (Primary)"]
+    subgraph Cloud["AWS Cloud - Primary"]
         DDB[("DynamoDB<br/>Operational Data")]
         ES[("OpenSearch<br/>Search/Analytics")]
         CACHE[("ElastiCache<br/>Hot Data")]
@@ -470,7 +470,7 @@ flowchart TB
     subgraph Controls["Mitigation Controls"]
         C1["CRC Checksums<br/>+ Manifests"]
         C2["Copybook-Driven<br/>Schema-on-Read"]
-        C3["Serverless Auto-<br/>Scaling (Glue)"]
+        C3["Serverless Auto-<br/>Scaling via Glue"]
         C4["IAM Roles<br/>+ Encryption"]
     end
 
@@ -507,7 +507,7 @@ flowchart TB
 
 ```mermaid
 mindmap
-    root((Migration<br/>Strategy))
+    root((Migration Strategy))
         Safety
             CRC Checksums
             Audit Manifests

@@ -329,7 +329,7 @@
         <div class="mermaid">
 graph LR
     subgraph Before["Before Migration"]
-        A[("Mainframe<br/>MIPS $$$$")] --> B["Applications"]
+        A[("Mainframe<br/>High MIPS Cost")] --> B["Applications"]
         A --> C["Reports"]
         A --> D["Analytics"]
     end
@@ -380,15 +380,15 @@ graph LR
 flowchart TB
     subgraph Mainframe["Legacy Mainframe"]
         direction TB
-        VSAM[("VSAM Files<br/>(EBCDIC Binary)")]
-        DB2[("DB2 Tables<br/>(Relational)")]
-        CPY["COBOL Copybooks<br/>(Schema)"]
+        VSAM[("VSAM Files<br/>EBCDIC Binary")]
+        DB2[("DB2 Tables<br/>Relational")]
+        CPY["COBOL Copybooks<br/>Schema"]
     end
 
     subgraph Pipeline["AWS Migration Pipeline"]
         direction TB
         S3IN[("S3 Input")]
-        GLUE["AWS Glue<br/>(Serverless ETL)"]
+        GLUE["AWS Glue<br/>Serverless ETL"]
         S3OUT[("S3 Output<br/>JSON")]
     end
 
@@ -431,8 +431,8 @@ flowchart TB
         <div class="mermaid">
 flowchart LR
     subgraph Input["Input Directory"]
-        DATA["Binary EBCDIC<br/>(.PS files)"]
-        COPY["COBOL Copybook<br/>(.cpy files)"]
+        DATA["Binary EBCDIC<br/>.PS files"]
+        COPY["COBOL Copybook<br/>.cpy files"]
     end
 
     subgraph Engine["Conversion Engine"]
@@ -533,7 +533,7 @@ flowchart LR
             <h3>The Transformation in Action</h3>
             <div class="mermaid">
 flowchart LR
-    B1["F0F0F0F0F0F0F0F1<br/>(EBCDIC Binary)"] -->|"Cobrix Parser"| R1['"CUST_ID": 1<br/>(Human Readable)']
+    B1["F0F0F0F0F0F0F0F1<br/>EBCDIC Bytes"] -->|Cobrix Parser| R1["CUST_ID: 1<br/>JSON Field"]
     style B1 fill:#868e96,stroke:#333,color:#fff
     style R1 fill:#51cf66,stroke:#333,color:#fff
             </div>
@@ -553,8 +553,8 @@ flowchart TB
     end
 
     subgraph Markers["Integrity Markers"]
-        CRC["._SUCCESS.crc<br/>(Checksum)"]
-        SUCCESS["_SUCCESS<br/>(Complete)"]
+        CRC["._SUCCESS.crc<br/>Checksum"]
+        SUCCESS["_SUCCESS<br/>Complete"]
         MANIFEST["manifest.json"]
     end
 
@@ -721,7 +721,7 @@ flowchart LR
             <h3>Phase 3: Full Modernization</h3>
             <div class="mermaid">
 flowchart TB
-    BATCH["Mainframe<br/>(Batch Only)"] -->|"Nightly"| DDB[("DynamoDB")]
+    BATCH["Mainframe<br/>Batch Only"] -->|Nightly| DDB[("DynamoDB")]
     DDB --> WEB["Web Apps"]
     DDB --> MOBILE["Mobile"]
     DDB --> API["APIs"]
@@ -822,7 +822,7 @@ flowchart TB
 
         <div class="mermaid">
 mindmap
-    root((Migration<br/>Strategy))
+    root((Migration Strategy))
         Safety
             CRC Checksums
             Audit Manifests
