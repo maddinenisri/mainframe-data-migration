@@ -1,7 +1,0 @@
-{"File_Id":0,"Record_Id":0,"Record_Byte_Length":60,"TRAN_TYPE":"01","TRAN_TYPE_DESC":"Purchase"}
-{"File_Id":0,"Record_Id":1,"Record_Byte_Length":60,"TRAN_TYPE":"02","TRAN_TYPE_DESC":"Payment"}
-{"File_Id":0,"Record_Id":2,"Record_Byte_Length":60,"TRAN_TYPE":"03","TRAN_TYPE_DESC":"Credit"}
-{"File_Id":0,"Record_Id":3,"Record_Byte_Length":60,"TRAN_TYPE":"04","TRAN_TYPE_DESC":"Authorization"}
-{"File_Id":0,"Record_Id":4,"Record_Byte_Length":60,"TRAN_TYPE":"05","TRAN_TYPE_DESC":"Refund"}
-{"File_Id":0,"Record_Id":5,"Record_Byte_Length":60,"TRAN_TYPE":"06","TRAN_TYPE_DESC":"Reversal"}
-{"File_Id":0,"Record_Id":6,"Record_Byte_Length":60,"TRAN_TYPE":"07","TRAN_TYPE_DESC":"Adjustment"}

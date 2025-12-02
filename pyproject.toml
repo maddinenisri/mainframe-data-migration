@@ -19,6 +19,8 @@ dev = [
 convert-ebcdic = "convert_all:main"
 export-db2 = "db2.scripts.db2_to_json:main"
 migrate-db2 = "db2.scripts.db2_to_postgres:main"
+mf-migrate = "mf_spark.cli:main"
+run-migration = "run_migration:main"
 
 [tool.ruff]
 line-length = 100

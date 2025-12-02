@@ -1,1 +1,36 @@
-.venv
+# Virtual environment
+.venv/
+
+# Python cache
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+
+# Output directories (regenerated)
+output/
+db2/output/
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Temporary files
+*.tmp
+~$*
+
+# Spark/Java
+*.log
+metastore_db/
+derby.log
+spark-warehouse/
+
+# Generated files
+*.pptx
+Mainframe_Migration.pptx

@@ -376,14 +376,21 @@ uv sync
 ### Run Conversion
 
 ```bash
-# Convert all VSAM datasets
+# Using the new mf_spark framework (recommended)
+uv run python run_migration.py
+
+# Or use the CLI
+uv run python -m mf_spark.cli run
+
+# Convert specific dataset only
+uv run python run_migration.py --dataset customers
+
+# Convert to Parquet format
+uv run python run_migration.py --format parquet
+
+# Legacy scripts (still supported)
 uv run python convert_all.py
-
-# Convert DB2 tables
 uv run python db2/scripts/db2_to_json.py
-
-# Quick test (customers only)
-uv run python local_test.py
 ```
 
 ### Verify Output
@@ -474,6 +481,29 @@ mindmap
 
 ```
 mainframe-migration/
+├── mf_spark/                   # Modular PySpark Framework
+│   ├── __init__.py             # Main exports
+│   ├── cli.py                  # Command-line interface
+│   ├── core/                   # Core components
+│   │   ├── session.py          # SparkSessionManager
+│   │   ├── base.py             # Base classes & enums
+│   │   └── migrator.py         # MainframeMigrator orchestrator
+│   ├── converters/             # Type conversion
+│   │   ├── vsam_types.py       # COBOL PIC -> Spark types
+│   │   ├── db2_types.py        # DB2 SQL -> Spark types
+│   │   └── type_mapper.py      # Unified type mapper
+│   ├── parsers/                # File parsers
+│   │   ├── copybook_parser.py  # COBOL copybook parser
+│   │   ├── ddl_parser.py       # DB2 DDL parser
+│   │   └── dcl_parser.py       # DB2 DCLGEN parser
+│   ├── validators/             # Data validation
+│   │   ├── data_validator.py   # Data quality checks
+│   │   └── schema_validator.py # Schema compatibility
+│   ├── utils/                  # Utilities
+│   │   ├── encoding.py         # EBCDIC conversion
+│   │   └── file_utils.py       # File operations
+│   └── config/                 # Configuration
+│       └── settings.py         # MigrationConfig
 ├── input/                      # Source files
 │   ├── *.PS                    # EBCDIC binary data files
 │   └── *.cpy                   # COBOL copybook schemas
@@ -485,15 +515,81 @@ mainframe-migration/
 │   └── conversion_manifest.json
 ├── db2/                        # DB2 migration
 │   ├── schema/source/          # DDL definitions
+│   ├── dcl/                    # DCLGEN files
 │   ├── scripts/                # Conversion scripts
 │   └── output/                 # DB2 JSON output
 ├── docs/                       # Documentation
 │   ├── DESIGN.md               # Technical design
 │   └── executive-presentation.html
-├── convert_all.py              # Main VSAM conversion script
+├── run_migration.py            # Main entry point (uses mf_spark)
+├── convert_all.py              # Legacy VSAM conversion script
 ├── local_test.py               # Quick test script
+├── vsam_to_spark_mappings.md   # VSAM type mapping reference
+├── db2_to_spark_mappings.md    # DB2 type mapping reference
 ├── pyproject.toml              # Python dependencies
 └── README.md                   # This file
+```
+
+---
+
+## mf_spark Framework
+
+The `mf_spark` package provides a modular, reusable PySpark framework for mainframe data migration.
+
+### Key Features
+
+| Module | Description |
+|--------|-------------|
+| **converters** | VSAM (COBOL PIC) and DB2 type mapping to Spark types |
+| **parsers** | Copybook, DDL, and DCLGEN file parsers |
+| **validators** | Data quality and schema compatibility validation |
+| **utils** | EBCDIC encoding, packed decimal handling |
+| **config** | JSON-based configuration with CardDemo defaults |
+
+### Usage Examples
+
+```python
+# Simple migration
+from mf_spark import MainframeMigrator
+
+migrator = MainframeMigrator()
+results = migrator.run()
+print(f"Converted {migrator.summary.total_records} records")
+
+# Type conversion
+from mf_spark.converters import VSAMTypeConverter, DB2TypeConverter
+
+vsam = VSAMTypeConverter()
+spark_type = vsam.convert("PIC S9(7)V99 COMP-3")  # DecimalType(9,2)
+
+db2 = DB2TypeConverter()
+spark_type = db2.convert("DECIMAL(15,2)")  # DecimalType(15,2)
+
+# Parse copybook
+from mf_spark.parsers import CopybookParser
+
+parser = CopybookParser()
+fields = parser.parse_file("input/CUSTREC.cpy")
+schema = parser.to_spark_schema(fields)
+```
+
+### CLI Commands
+
+```bash
+# Run full migration
+python -m mf_spark.cli run
+
+# List configured datasets
+python -m mf_spark.cli list
+
+# Validate configuration
+python -m mf_spark.cli validate
+
+# Parse and display copybook layout
+python -m mf_spark.cli parse-copybook input/CUSTREC.cpy --schema
+
+# Parse DDL file
+python -m mf_spark.cli parse-ddl db2/schema/source/TRNTYCAT.ddl
 ```
 
 ---

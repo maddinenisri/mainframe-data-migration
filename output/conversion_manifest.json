@@ -1,106 +1,185 @@
 {
-  "datasets": [
-    {
-      "name": "customers",
-      "data_file": "AWS.M2.CARDDEMO.CUSTDATA.PS",
-      "copybook": "CUSTREC.cpy",
-      "status": "success",
-      "record_count": 50,
-      "error": null,
-      "output_path": "output/customers"
-    },
-    {
-      "name": "accounts",
-      "data_file": "AWS.M2.CARDDEMO.ACCTDATA.PS",
-      "copybook": "CVACT01Y.cpy",
-      "status": "success",
-      "record_count": 50,
-      "error": null,
-      "output_path": "output/accounts"
-    },
-    {
-      "name": "cards",
-      "data_file": "AWS.M2.CARDDEMO.CARDDATA.PS",
-      "copybook": "CVACT02Y.cpy",
-      "status": "success",
-      "record_count": 50,
-      "error": null,
-      "output_path": "output/cards"
-    },
-    {
-      "name": "card_xref",
-      "data_file": "AWS.M2.CARDDEMO.CARDXREF.PS",
-      "copybook": "CVACT03Y.cpy",
-      "status": "success",
-      "record_count": 50,
-      "error": null,
-      "output_path": "output/card_xref"
-    },
-    {
-      "name": "daily_transactions",
-      "data_file": "AWS.M2.CARDDEMO.DALYTRAN.PS",
-      "copybook": "CVTRA06Y.cpy",
-      "status": "success",
-      "record_count": 300,
-      "error": null,
-      "output_path": "output/daily_transactions"
-    },
-    {
-      "name": "transaction_types",
-      "data_file": "AWS.M2.CARDDEMO.TRANTYPE.PS",
-      "copybook": "CVTRA03Y.cpy",
-      "status": "success",
-      "record_count": 7,
-      "error": null,
-      "output_path": "output/transaction_types"
-    },
-    {
-      "name": "transaction_categories",
-      "data_file": "AWS.M2.CARDDEMO.TRANCATG.PS",
-      "copybook": "CVTRA04Y.cpy",
-      "status": "success",
-      "record_count": 18,
-      "error": null,
-      "output_path": "output/transaction_categories"
-    },
-    {
-      "name": "users",
-      "data_file": "AWS.M2.CARDDEMO.USRSEC.PS",
-      "copybook": "CSUSR01Y.cpy",
-      "status": "success",
-      "record_count": 10,
-      "error": null,
-      "output_path": "output/users"
-    },
-    {
-      "name": "discount_groups",
-      "data_file": "AWS.M2.CARDDEMO.DISCGRP.PS",
-      "copybook": "DISCGRP.cpy",
-      "status": "success",
-      "record_count": 51,
-      "error": null,
-      "output_path": "output/discount_groups"
-    },
-    {
-      "name": "category_balances",
-      "data_file": "AWS.M2.CARDDEMO.TCATBALF.PS",
-      "copybook": "TCATBALF.cpy",
-      "status": "success",
-      "record_count": 50,
-      "error": null,
-      "output_path": "output/category_balances"
-    },
-    {
-      "name": "export_data",
-      "data_file": "AWS.M2.CARDDEMO.EXPORT.DATA.PS",
-      "copybook": "CVEXPORT.cpy",
-      "status": "success",
-      "record_count": 500,
-      "error": null,
-      "output_path": "output/export_data"
-    }
-  ],
-  "total_records": 1136,
-  "cobrix_version": "2.6.9",
-  "spark_version": "3.5.0"
+  "migration_summary": {
+    "start_time": "2025-12-01T23:18:46.656788",
+    "end_time": null,
+    "duration_seconds": null,
+    "total_datasets": 11,
+    "successful": 11,
+    "failed": 0,
+    "skipped": 0,
+    "total_records": 1136,
+    "success_rate": "100.0%",
+    "results": [
+      {
+        "name": "customers",
+        "status": "success",
+        "record_count": 50,
+        "error": null,
+        "output_path": "output/customers",
+        "start_time": "2025-12-01T23:18:48.566463",
+        "end_time": "2025-12-01T23:18:52.324163",
+        "duration_seconds": 3.7577,
+        "source_info": {
+          "data_file": "AWS.M2.CARDDEMO.CUSTDATA.PS",
+          "copybook": "CUSTREC.cpy",
+          "type": "vsam"
+        }
+      },
+      {
+        "name": "accounts",
+        "status": "success",
+        "record_count": 50,
+        "error": null,
+        "output_path": "output/accounts",
+        "start_time": "2025-12-01T23:18:52.324203",
+        "end_time": "2025-12-01T23:18:53.349055",
+        "duration_seconds": 1.024852,
+        "source_info": {
+          "data_file": "AWS.M2.CARDDEMO.ACCTDATA.PS",
+          "copybook": "CVACT01Y.cpy",
+          "type": "vsam"
+        }
+      },
+      {
+        "name": "cards",
+        "status": "success",
+        "record_count": 50,
+        "error": null,
+        "output_path": "output/cards",
+        "start_time": "2025-12-01T23:18:53.349069",
+        "end_time": "2025-12-01T23:18:53.923070",
+        "duration_seconds": 0.574001,
+        "source_info": {
+          "data_file": "AWS.M2.CARDDEMO.CARDDATA.PS",
+          "copybook": "CVACT02Y.cpy",
+          "type": "vsam"
+        }
+      },
+      {
+        "name": "card_xref",
+        "status": "success",
+        "record_count": 50,
+        "error": null,
+        "output_path": "output/card_xref",
+        "start_time": "2025-12-01T23:18:53.923093",
+        "end_time": "2025-12-01T23:18:54.365782",
+        "duration_seconds": 0.442689,
+        "source_info": {
+          "data_file": "AWS.M2.CARDDEMO.CARDXREF.PS",
+          "copybook": "CVACT03Y.cpy",
+          "type": "vsam"
+        }
+      },
+      {
+        "name": "daily_transactions",
+        "status": "success",
+        "record_count": 300,
+        "error": null,
+        "output_path": "output/daily_transactions",
+        "start_time": "2025-12-01T23:18:54.365799",
+        "end_time": "2025-12-01T23:18:55.346447",
+        "duration_seconds": 0.980648,
+        "source_info": {
+          "data_file": "AWS.M2.CARDDEMO.DALYTRAN.PS",
+          "copybook": "CVTRA06Y.cpy",
+          "type": "vsam"
+        }
+      },
+      {
+        "name": "transaction_types",
+        "status": "success",
+        "record_count": 7,
+        "error": null,
+        "output_path": "output/transaction_types",
+        "start_time": "2025-12-01T23:18:55.346473",
+        "end_time": "2025-12-01T23:18:55.859184",
+        "duration_seconds": 0.512711,
+        "source_info": {
+          "data_file": "AWS.M2.CARDDEMO.TRANTYPE.PS",
+          "copybook": "CVTRA03Y.cpy",
+          "type": "vsam"
+        }
+      },
+      {
+        "name": "transaction_categories",
+        "status": "success",
+        "record_count": 18,
+        "error": null,
+        "output_path": "output/transaction_categories",
+        "start_time": "2025-12-01T23:18:55.859226",
+        "end_time": "2025-12-01T23:18:56.360899",
+        "duration_seconds": 0.501673,
+        "source_info": {
+          "data_file": "AWS.M2.CARDDEMO.TRANCATG.PS",
+          "copybook": "CVTRA04Y.cpy",
+          "type": "vsam"
+        }
+      },
+      {
+        "name": "users",
+        "status": "success",
+        "record_count": 10,
+        "error": null,
+        "output_path": "output/users",
+        "start_time": "2025-12-01T23:18:56.360919",
+        "end_time": "2025-12-01T23:18:57.007662",
+        "duration_seconds": 0.646743,
+        "source_info": {
+          "data_file": "AWS.M2.CARDDEMO.USRSEC.PS",
+          "copybook": "CSUSR01Y.cpy",
+          "type": "vsam"
+        }
+      },
+      {
+        "name": "discount_groups",
+        "status": "success",
+        "record_count": 51,
+        "error": null,
+        "output_path": "output/discount_groups",
+        "start_time": "2025-12-01T23:18:57.007676",
+        "end_time": "2025-12-01T23:18:57.605197",
+        "duration_seconds": 0.597521,
+        "source_info": {
+          "data_file": "AWS.M2.CARDDEMO.DISCGRP.PS",
+          "copybook": "DISCGRP.cpy",
+          "type": "vsam"
+        }
+      },
+      {
+        "name": "category_balances",
+        "status": "success",
+        "record_count": 50,
+        "error": null,
+        "output_path": "output/category_balances",
+        "start_time": "2025-12-01T23:18:57.605210",
+        "end_time": "2025-12-01T23:18:58.079521",
+        "duration_seconds": 0.474311,
+        "source_info": {
+          "data_file": "AWS.M2.CARDDEMO.TCATBALF.PS",
+          "copybook": "TCATBALF.cpy",
+          "type": "vsam"
+        }
+      },
+      {
+        "name": "export_data",
+        "status": "success",
+        "record_count": 500,
+        "error": null,
+        "output_path": "output/export_data",
+        "start_time": "2025-12-01T23:18:58.079535",
+        "end_time": "2025-12-01T23:18:59.394552",
+        "duration_seconds": 1.315017,
+        "source_info": {
+          "data_file": "AWS.M2.CARDDEMO.EXPORT.DATA.PS",
+          "copybook": "CVEXPORT.cpy",
+          "type": "vsam"
+        }
+      }
+    ]
+  },
+  "config": {
+    "cobrix_version": "2.6.9",
+    "spark_version": "3.5.0",
+    "output_format": "json"
+  }
 }
